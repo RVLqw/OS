@@ -1,0 +1,21 @@
+.PHONY: clean run asm
+
+OBJS=hello.o fibb.o
+CFLAGS=-O2 -g3
+
+run: fibb
+	./fibb
+
+hello: $(OBJS)
+	gcc $(CFLAGS) -o hello $(OBJS)
+
+%.o: %.c
+	gcc $(CFLAGS) -c -o $@ $<
+
+
+clean:
+	rm -f hello *.o *~ *.a
+
+asm:
+	gcc -S -o fibb.s fibb.c
+	gcc -S -o hello.s hello.c
